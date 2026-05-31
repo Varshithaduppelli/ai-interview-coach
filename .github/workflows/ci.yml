@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install root deps
+        run: npm install
+      - name: Install client deps
+        run: cd client && npm install
+      - name: Install server deps
+        run: cd server && npm install
+      - name: Build client
+        run: cd client && npm run build
+      - name: Verify server starts
+        run: |
+          cd server
+          node -e "require('./index.js')" &
+          sleep 3
+          kill %1 2>/dev/null || true
+        env:
+          PORT: 5000
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
