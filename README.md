@@ -74,20 +74,21 @@ npm run dev
 ---
 
 ## Project Structure
+
+```
 ai-interview-coach/
-├── client/                 # React + Vite frontend
+├── client/
 │   └── src/
-│       ├── pages/          # Dashboard, Interview, Results, Auth
-│       ├── components/     # Navbar, Layout
-│       └── context/        # AuthContext with JWT
-│
-└── server/                 # Node.js + Express backend
-├── controllers/        # Auth, Interview, Dashboard
-├── models/             # User, Session, Question
-├── routes/             # REST API routes
-├── services/           # Groq AI service
-└── config/             # MongoDB connection
----
+│       ├── pages/
+│       ├── components/
+│       └── context/
+└── server/
+    ├── controllers/
+    ├── models/
+    ├── routes/
+    ├── services/
+    └── config/
+```
 
 ## Deployment
 
